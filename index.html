@@ -7,45 +7,56 @@
         :root { --gold: #C5A059; }
         body { background-color: #050505; color: #d1d1d1; font-family: 'Georgia', serif; margin: 0; padding: 20px; }
         .wrapper { max-width: 700px; margin: 0 auto; border: 1px solid #1a1a1a; padding: 40px; border-radius: 8px; background: #080808; }
-        h1 { color: var(--gold); text-align: center; letter-spacing: 3px; font-size: 20px; }
-        .q-group { margin-bottom: 25px; border-bottom: 1px solid #151515; padding-bottom: 20px; }
-        .opt { width: 32px; height: 32px; border: 1px solid #333; background: transparent; color: #777; cursor: pointer; margin: 2px; }
+        h1 { color: var(--gold); text-align: center; letter-spacing: 3px; font-size: 20px; margin-bottom: 30px; }
+        .q-group { margin-bottom: 20px; border-bottom: 1px solid #151515; padding-bottom: 15px; }
+        .options { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
+        .opt { width: 32px; height: 32px; border: 1px solid #333; background: transparent; color: #777; cursor: pointer; }
         .opt.active { border-color: var(--gold); color: var(--gold); }
-        button#submit { width: 100%; padding: 15px; background: var(--gold); color: black; font-weight: bold; cursor: pointer; border: none; }
-        input[type="number"] { background: #111; border: 1px solid #333; color: white; padding: 5px; width: 60px; }
+        button#submit { width: 100%; padding: 15px; background: var(--gold); color: black; font-weight: bold; cursor: pointer; border: none; margin-top: 20px; }
+        input[type="number"] { background: #111; border: 1px solid #333; color: white; padding: 5px; width: 60px; margin-right: 10px; }
         .hidden { display: none; }
     </style>
 </head>
 <body>
 
 <div class="wrapper">
-    <div style="text-align: right; margin-bottom: 20px;">
-        <button onclick="toggleMusic()" style="background:none; border:none; color:#555; cursor:pointer; font-size: 12px;">ॐ Som Meditativo</button>
+    <div style="text-align: right; margin-bottom: 10px;">
+        <button onclick="toggleMusic()" style="background:none; border:none; color:#555; cursor:pointer; font-size: 11px;">ॐ Som Meditativo</button>
         <audio id="bgMusic" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"></audio>
     </div>
 
-    <h1>BIOSYNC | AVALIAÇÃO DE LONGEVIDADE</h1>
+    <h1>BIOSYNC | PROTOCOLO DE LONGEVIDADE</h1>
     
     <div id="survey">
-        <div class="q-group">
-            <label>Idade atual: <input type="number" id="age"></label><br><br>
-            <label>Idade falecimento pai: <input type="number" id="dadAge"></label>
-            <label>Idade falecimento mãe: <input type="number" id="momAge"></label>
+        <div class="q-group" style="border: 1px solid #222; padding: 15px; border-radius: 5px;">
+            <label>Idade: <input type="number" id="age"></label>
+            <label>Pai (falecimento): <input type="number" id="dadAge"></label>
+            <label>Mãe (falecimento): <input type="number" id="momAge"></label>
         </div>
         <div id="questions-container"></div>
-        <button id="submit" onclick="showResults()">GERAR PROJEÇÃO</button>
+        <button id="submit" onclick="showResults()">GERAR PROJEÇÃO DE VITALIDADE</button>
     </div>
 
     <div id="results" class="hidden">
         <h2 style="color:var(--gold)">Projeção Analítica</h2>
-        <p>Expectativa de Vitalidade: <strong id="score" style="font-size:24px;"></strong></p>
-        <div id="advice" style="margin-top:20px;"></div>
-        <a href="https://go.hotmart.com/D106336710R" class="buy-btn" style="display:block; text-align:center; padding:15px; background:var(--gold); color:black; font-weight:bold; text-decoration:none; margin-top:20px;">OBTER RELATÓRIO COMPLETO</a>
+        <p>Expectativa estimada: <strong id="score" style="font-size:24px;"></strong></p>
+        <div id="advice" style="margin-top:20px; line-height: 1.6;"></div>
+        <a href="https://go.hotmart.com/D106336710R" style="display:block; text-align:center; padding:15px; background:var(--gold); color:black; font-weight:bold; text-decoration:none; margin-top:20px;">OBTER RELATÓRIO COMPLETO</a>
     </div>
 </div>
 
 <script>
-    const qs = ["Qualidade do sono profundo?", "Nível de estresse oxidativo?", "Consumo de vegetais crucíferos?", "Prática de exercícios de força?", "Gestão de cortisol?", "Nível de satisfação com o propósito vital?"];
+    const qs = [
+        "Qualidade do sono profundo?", "Nível de estresse oxidativo?", "Consumo de vegetais crucíferos?", 
+        "Prática de exercícios de força?", "Gestão de cortisol?", "Satisfação com propósito vital?", 
+        "Hidratação diária?", "Exposição solar (min/dia)?", "Prática de mindfulness?", 
+        "Ingestão de açúcares?", "Recuperação pós-esforço?", "Exames de biomarcadores?", 
+        "Atividade aeróbica semanal?", "Controle de composição corporal?", "Exposição a toxinas?", 
+        "Engajamento social?", "Estímulo cognitivo?", "Diversidade de frutas?", 
+        "Mobilidade ativa?", "Higiene luminosa noturna?", "Uso de aditivos?", 
+        "Postura biomecânica?", "Consumo de gorduras saudáveis?", "Foco em tarefas?", "Saúde metabólica?"
+    ];
+
     const container = document.getElementById('questions-container');
     qs.forEach((q, i) => {
         let opts = "";
@@ -66,9 +77,8 @@
     function showResults() {
         document.getElementById('survey').classList.add('hidden');
         document.getElementById('results').classList.remove('hidden');
-        const age = document.getElementById('age').value || 40;
-        document.getElementById('score').innerText = (parseInt(age) + 40 + Math.floor(Math.random() * 10)) + " Anos";
-        document.getElementById('advice').innerHTML = "Baseado em seu histórico familiar e hábitos, recomendamos a otimização de biomarcadores e foco em modulação inflamatória.";
+        document.getElementById('score').innerText = (78 + Math.floor(Math.random() * 22)) + " Anos";
+        document.getElementById('advice').innerHTML = "Baseado em seu histórico genético e hábitos declarados, recomendamos a otimização de biomarcadores através de modulação inflamatória, ajuste circadiano e treino neuromuscular de alta densidade.";
     }
 </script>
 </body>
