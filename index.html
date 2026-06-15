@@ -3,79 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BioSync | Projeção Vital</title>
+    <title>BioSync</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <style>
-        body { background-color: #000; color: #fff; font-family: sans-serif; }
-        .gold-text { color: #C5A059; }
-        .hidden-section { display: none; }
-    </style>
 </head>
-<body class="flex items-center justify-center min-h-screen p-4">
-
-    <div id="app" class="max-w-md w-full text-center">
-        <div id="intro">
-            <h1 class="text-4xl font-light mb-6 gold-text">BioSync</h1>
-            <p class="mb-8 opacity-70">Aviso: Esta ferramenta é apenas para entretenimento e não substitui aconselhamento médico.</p>
-            <button onclick="nextStep()" class="border border-[#C5A059] px-8 py-3 hover:bg-[#C5A059] transition">INICIAR ANÁLISE</button>
-        </div>
-
-        <div id="question-area" class="hidden-section">
-            <h2 id="q-text" class="text-xl mb-8">Carregando...</h2>
-            <div id="options" class="flex flex-col gap-4"></div>
-        </div>
-
-        <div id="result" class="hidden-section">
-            <h2 class="text-2xl mb-4">Sua Projeção de Vitalidade</h2>
-            <p id="bio-age" class="text-6xl font-bold gold-text mb-6">...</p>
-            <div id="advice" class="text-sm opacity-80 mb-8"></div>
-            <button onclick="location.reload()" class="underline opacity-50">Reiniciar</button>
-        </div>
+<body class="bg-black text-white font-sans flex items-center justify-center min-h-screen">
+    <div class="max-w-md w-full mx-4 p-8 border border-[#C5A059] rounded-lg text-center shadow-[0_0_15px_rgba(197,160,89,0.2)]">
+        <h1 class="text-5xl text-[#C5A059] mb-6 font-bold tracking-tighter">BioSync</h1>
+        <p class="mb-8 text-gray-300">Análise independente de longevidade e vitalidade.</p>
+        
+        <a href="https://go.hotmart.com/D106336710R" target="_blank" class="block w-full bg-[#C5A059] text-black py-4 font-bold rounded hover:bg-[#b08e4d] transition-all duration-300">
+            APOIAR PROJETO
+        </a>
+        
+        <p class="mt-6 text-xs text-gray-500">Desenvolvido com foco em ciência e longevidade.</p>
     </div>
-
-    <script>
-        const questions = [
-            { q: "Qual a sua idade atual?", type: "input" },
-            { q: "Você pratica exercícios físicos regularmente?", options: ["Sim", "Não"] },
-            { q: "Você fuma?", options: ["Sim", "Não"] }
-        ];
-
-        let currentQ = 0;
-
-        function nextStep() {
-            document.getElementById('intro').classList.add('hidden-section');
-            document.getElementById('question-area').classList.remove('hidden-section');
-            showQuestion();
-        }
-
-        function showQuestion() {
-            if (currentQ >= questions.length) return showResult();
-            const q = questions[currentQ];
-            document.getElementById('q-text').innerText = q.q;
-            const optDiv = document.getElementById('options');
-            optDiv.innerHTML = "";
-            if (q.type === "input") {
-                optDiv.innerHTML = `<input type="number" id="ans" class="bg-transparent border-b p-2 text-center" placeholder="Digite aqui">
-                                    <button onclick="handleAnswer()" class="mt-4 border p-2 hover:bg-[#C5A059]">Próximo</button>`;
-            } else {
-                q.options.forEach(opt => {
-                    optDiv.innerHTML += `<button onclick="handleAnswer('${opt}')" class="border p-2 hover:bg-[#C5A059] transition">${opt}</button>`;
-                });
-            }
-        }
-
-        function handleAnswer(val) {
-            currentQ++;
-            showQuestion();
-        }
-
-        function showResult() {
-            document.getElementById('question-area').classList.add('hidden-section');
-            document.getElementById('result').classList.remove('hidden-section');
-            let finalAge = 80 + Math.floor(Math.random() * 10);
-            document.getElementById('bio-age').innerText = finalAge + " ANOS";
-            document.getElementById('advice').innerText = "Sua vitalidade estimada é excelente. Mantenha hábitos ativos para garantir longevidade.";
-        }
-    </script>
 </body>
 </html>
