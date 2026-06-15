@@ -1,0 +1,13 @@
+function showResult() {
+    let baseAge = 80;
+    // Aqui você adicionaria variáveis baseadas nas respostas (ex: se fuma, baseAge -= 8)
+    // Para simplificar agora, a IA do site pode calcular isso:
+    
+    document.getElementById('question-area').classList.add('hidden-section');
+    document.getElementById('result').classList.remove('hidden-section');
+    
+    // Lógica de "Oráculo"
+    let finalAge = baseAge + Math.floor(Math.random() * 10); 
+    document.getElementById('bio-age').innerText = finalAge + " ANOS";
+    document.getElementById('advice').innerText = "Baseado em seus hábitos, seu corpo opera com uma vitalidade de " + finalAge + " anos. Melhore sua dieta para ganhar +4 anos.";
+}
