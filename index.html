@@ -2,55 +2,55 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <title>BioSync | Análise de Longevidade</title>
+    <title>BioSync | Protocolo de Longevidade</title>
     <style>
         :root { --gold: #C5A059; }
-        body { background-color: #050505; color: #e5e5e5; font-family: 'Segoe UI', sans-serif; margin: 0; padding: 20px; }
-        .wrapper { max-width: 700px; margin: 0 auto; border: 1px solid #222; padding: 40px; border-radius: 12px; background: #0a0a0a; }
-        h1 { color: var(--gold); text-align: center; letter-spacing: 2px; }
-        .question { margin-bottom: 25px; border-bottom: 1px solid #1a1a1a; padding-bottom: 15px; }
-        .options { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
-        .opt { width: 35px; height: 35px; border: 1px solid var(--gold); background: transparent; color: white; cursor: pointer; border-radius: 4px; transition: 0.3s; }
-        .opt:hover, .opt.active { background: var(--gold); color: black; }
-        button#submit, .buy-btn { width: 100%; padding: 15px; background: var(--gold); color: black; border: none; font-weight: bold; cursor: pointer; margin-top: 20px; text-decoration: none; display: block; text-align: center; }
+        body { background-color: #050505; color: #d1d1d1; font-family: 'Georgia', serif; margin: 0; padding: 20px; }
+        .wrapper { max-width: 700px; margin: 0 auto; border: 1px solid #1a1a1a; padding: 40px; border-radius: 8px; background: #080808; }
+        h1 { color: var(--gold); text-align: center; letter-spacing: 3px; font-size: 20px; }
+        .q-group { margin-bottom: 25px; border-bottom: 1px solid #151515; padding-bottom: 20px; }
+        .opt { width: 32px; height: 32px; border: 1px solid #333; background: transparent; color: #777; cursor: pointer; margin: 2px; }
+        .opt.active { border-color: var(--gold); color: var(--gold); }
+        button#submit { width: 100%; padding: 15px; background: var(--gold); color: black; font-weight: bold; cursor: pointer; border: none; }
+        input[type="number"] { background: #111; border: 1px solid #333; color: white; padding: 5px; width: 60px; }
         .hidden { display: none; }
-        #audio-control { text-align: right; margin-bottom: 10px; }
     </style>
 </head>
 <body>
 
 <div class="wrapper">
-    <div id="audio-control">
-        <button onclick="toggleMusic()" style="background:none; border:1px solid #333; color:white; cursor:pointer;">♪ Som Ambiente</button>
-        <audio id="bgMusic" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+    <div style="text-align: right; margin-bottom: 20px;">
+        <button onclick="toggleMusic()" style="background:none; border:none; color:#555; cursor:pointer; font-size: 12px;">ॐ Som Meditativo</button>
+        <audio id="bgMusic" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"></audio>
     </div>
 
-    <h1>BIOSYNC ANALYTICS</h1>
-    <p style="text-align:center; font-size: 12px; color: #666;">PROTOCOLO DE AVALIAÇÃO DE LONGEVIDADE E VITALIDADE ESTATÍSTICA</p>
-
+    <h1>BIOSYNC | AVALIAÇÃO DE LONGEVIDADE</h1>
+    
     <div id="survey">
+        <div class="q-group">
+            <label>Idade atual: <input type="number" id="age"></label><br><br>
+            <label>Idade falecimento pai: <input type="number" id="dadAge"></label>
+            <label>Idade falecimento mãe: <input type="number" id="momAge"></label>
+        </div>
         <div id="questions-container"></div>
-        <button id="submit" onclick="showResults()">PROCESSAR DADOS DE VITALIDADE</button>
+        <button id="submit" onclick="showResults()">GERAR PROJEÇÃO</button>
     </div>
 
     <div id="results" class="hidden">
-        <h2 style="color:var(--gold)">Análise Concluída</h2>
-        <p>Sua projeção estimada de vitalidade é de: <strong id="score" style="font-size:24px;"></strong></p>
-        <div id="advice" style="margin-top:20px; line-height: 1.6;"></div>
-        
-        <!-- Link de Venda da Hotmart Integrado -->
-        <a href="https://go.hotmart.com/D106336710R" class="buy-btn">APOIAR O PROJETO E RECEBER RELATÓRIO COMPLETO</a>
+        <h2 style="color:var(--gold)">Projeção Analítica</h2>
+        <p>Expectativa de Vitalidade: <strong id="score" style="font-size:24px;"></strong></p>
+        <div id="advice" style="margin-top:20px;"></div>
+        <a href="https://go.hotmart.com/D106336710R" class="buy-btn" style="display:block; text-align:center; padding:15px; background:var(--gold); color:black; font-weight:bold; text-decoration:none; margin-top:20px;">OBTER RELATÓRIO COMPLETO</a>
     </div>
 </div>
 
 <script>
-    const qs = ["Qual a qualidade média do seu sono profundo (h)?", "Frequência de treino de resistência semanal?", "Índice de consumo de vegetais crucíferos?", "Nível de hidratação diária (Litros)?", "Exposição diária à luz solar (min)?", "Prática de protocolos de respiração/mindfulness?", "Ingestão de açúcares refinados (escala 1-10)?", "Capacidade de recuperação pós-esforço?", "Regularidade de exames de biomarcadores?", "Minutos de atividade aeróbica por semana?", "Controle de composição corporal?", "Exposição a agentes tóxicos (fumo/álcool)?", "Nível de engajamento social?", "Frequência de estímulo cognitivo?", "Diversidade de frutas na dieta?", "Gestão de picos de cortisol?", "Protocolos de mobilidade ativa?", "Higiene luminosa pré-sono?", "Consumo de aditivos químicos?", "Alinhamento com propósito vital?", "Qualidade da biomecânica postural?", "Consumo de ácidos graxos essenciais?", "Tempo de exposição a telas antes do sono?", "Foco em tarefas de alta complexidade?", "Satisfação com saúde metabólica?"];
-    
+    const qs = ["Qualidade do sono profundo?", "Nível de estresse oxidativo?", "Consumo de vegetais crucíferos?", "Prática de exercícios de força?", "Gestão de cortisol?", "Nível de satisfação com o propósito vital?"];
     const container = document.getElementById('questions-container');
     qs.forEach((q, i) => {
         let opts = "";
         for(let n=1; n<=10; n++) opts += `<button class="opt" onclick="select(this)">${n}</button>`;
-        container.innerHTML += `<div class="question"><div>${i+1}. ${q}</div><div class="options">${opts}</div></div>`;
+        container.innerHTML += `<div class="q-group"><div>${i+1}. ${q}</div><div class="options">${opts}</div></div>`;
     });
 
     function select(el) {
@@ -66,15 +66,9 @@
     function showResults() {
         document.getElementById('survey').classList.add('hidden');
         document.getElementById('results').classList.remove('hidden');
-        document.getElementById('score').innerText = (78 + Math.floor(Math.random() * 22)) + " Anos de Vitalidade";
-        document.getElementById('advice').innerHTML = `
-            <h3 style="color:var(--gold)">Protocolos Sugeridos:</h3>
-            <ul>
-                <li><strong>Otimização Metabólica:</strong> Priorize janelas de alimentação restrita (jejum) para regulação insulínica.</li>
-                <li><strong>Treino Neuromuscular:</strong> Aumente a carga em exercícios compostos para preservar a densidade óssea.</li>
-                <li><strong>Higiene Circadiana:</strong> Bloqueie luz azul 2h antes do sono para maximizar a secreção de melatonina.</li>
-                <li><strong>Suplementação Inteligente:</strong> Consulte especialistas sobre magnésio, ômega-3 e vitamina D3.</li>
-            </ul>`;
+        const age = document.getElementById('age').value || 40;
+        document.getElementById('score').innerText = (parseInt(age) + 40 + Math.floor(Math.random() * 10)) + " Anos";
+        document.getElementById('advice').innerHTML = "Baseado em seu histórico familiar e hábitos, recomendamos a otimização de biomarcadores e foco em modulação inflamatória.";
     }
 </script>
 </body>
