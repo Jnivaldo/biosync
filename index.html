@@ -2,79 +2,87 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BioSync | Longevity Protocol</title>
-    <!-- Fontes Premium -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
-        :root { --gold: #C5A059; --bg: #0A0A0A; --text: #E0E0E0; }
-        body { background-color: var(--bg); color: var(--text); font-family: 'Montserrat', sans-serif; margin: 0; padding: 20px; display: flex; justify-content: center; }
-        .container { max-width: 600px; width: 100%; background: #121212; padding: 40px; border-radius: 12px; border: 1px solid #222; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
-        h1 { font-family: 'Playfair Display', serif; color: var(--gold); text-align: center; letter-spacing: 2px; margin-bottom: 30px; }
-        .lang-btns { text-align: center; margin-bottom: 20px; }
-        .lang-btns button { background: transparent; border: 1px solid var(--gold); color: var(--gold); padding: 5px 15px; margin: 0 5px; cursor: pointer; transition: 0.3s; border-radius: 4px; }
-        .lang-btns button:hover { background: var(--gold); color: black; }
-        .q-group { margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid #222; }
-        .q-text { margin-bottom: 10px; font-weight: 300; }
-        .options { display: flex; gap: 5px; flex-wrap: wrap; }
-        .opt { width: 35px; height: 35px; border: 1px solid #333; background: #1A1A1A; color: #888; cursor: pointer; transition: 0.3s; border-radius: 4px; }
-        .opt:hover { border-color: var(--gold); }
-        .opt.active { background: var(--gold); color: black; border-color: var(--gold); }
-        #submit { width: 100%; padding: 15px; background: var(--gold); border: none; font-weight: bold; cursor: pointer; border-radius: 4px; margin-top: 20px; }
+        :root { --gold: #C5A059; --bg: #0A0A0A; }
+        body { background-color: var(--bg); color: #E0E0E0; font-family: 'Montserrat', sans-serif; padding: 20px; display: flex; justify-content: center; }
+        .container { max-width: 600px; width: 100%; background: #121212; padding: 40px; border-radius: 12px; border: 1px solid #222; }
+        h1 { font-family: 'Playfair Display', serif; color: var(--gold); text-align: center; }
+        .q-group { margin-bottom: 25px; border-bottom: 1px solid #222; padding-bottom: 15px; }
+        .q-text { margin-bottom: 10px; font-size: 14px; line-height: 1.5; }
+        .opt { width: 35px; height: 35px; border: 1px solid #333; background: #1A1A1A; color: #888; cursor: pointer; border-radius: 4px; }
+        .opt.active { background: var(--gold); color: black; border: none; }
+        button#submit { width: 100%; padding: 15px; background: var(--gold); border: none; font-weight: bold; cursor: pointer; border-radius: 4px; margin-top: 20px; }
         .hidden { display: none; }
-        input { background: #1A1A1A; border: 1px solid #333; color: white; padding: 8px; border-radius: 4px; margin: 5px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="lang-btns">
-        <button onclick="setLang('pt')">PT</button>
-        <button onclick="setLang('en')">EN</button>
-        <button onclick="setLang('es')">ES</button>
+    <div style="text-align: center; margin-bottom: 20px;">
+        <button onclick="setLang('pt')" style="background:none; color:var(--gold); border:none; cursor:pointer;">PT</button> |
+        <button onclick="setLang('en')" style="background:none; color:var(--gold); border:none; cursor:pointer;">EN</button> |
+        <button onclick="setLang('es')" style="background:none; color:var(--gold); border:none; cursor:pointer;">ES</button>
+    </div>
+    
+    <div style="text-align: center; margin-bottom: 20px;">
+        <audio id="music" loop>
+            <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+        </audio>
+        <button onclick="document.getElementById('music').play()" style="background:none; border:1px solid #444; color:#888; cursor:pointer;">▶ Play Ambient Music</button>
     </div>
 
     <h1 id="title">BIOSYNC | PROTOCOLO DE LONGEVIDADE</h1>
-    
     <div id="survey">
-        <div style="margin-bottom: 20px; text-align: center;">
-            <input type="number" id="age" placeholder="Idade">
-        </div>
         <div id="questions-container"></div>
         <button id="submit" onclick="showResults()">GERAR PROJEÇÃO</button>
     </div>
-
-    <div id="results" class="hidden" style="text-align: center;">
-        <h2 id="res-title" style="color:var(--gold); font-family: 'Playfair Display', serif;">Projeção Analítica</h2>
-        <p>Expectativa: <strong id="score" style="font-size: 28px; color: var(--gold);"></strong></p>
-        <a href="https://go.hotmart.com/D106336710R" style="display:inline-block; margin-top:20px; padding:15px 30px; background:var(--gold); color:black; text-decoration:none; font-weight:bold; border-radius:4px;">OBTER RELATÓRIO COMPLETO</a>
+    <div id="results" class="hidden" style="text-align:center;">
+        <h2 id="res-title" style="color:var(--gold)">Projeção Analítica</h2>
+        <a href="https://go.hotmart.com/D106336710R" style="display:inline-block; margin-top:20px; padding:15px; background:var(--gold); color:black; text-decoration:none; font-weight:bold;">OBTER RELATÓRIO COMPLETO</a>
     </div>
 </div>
 
 <script>
-    const i18n = {
-        'pt': { title: "BIOSYNC | PROTOCOLO DE LONGEVIDADE", btn: "GERAR PROJEÇÃO", res: "Projeção Analítica", qs: ["Qualidade do sono?", "Estresse oxidativo?", "Vegetais crucíferos?", "Treino de força?", "Gestão de cortisol?", "Propósito vital?", "Hidratação?", "Exposição solar?", "Mindfulness?", "Ingestão de açúcares?", "Recuperação?", "Biomarcadores?", "Atividade aeróbica?", "Composição corporal?", "Toxinas?", "Engajamento social?", "Estímulo cognitivo?", "Diversidade de frutas?", "Mobilidade?", "Higiene luminosa?", "Aditivos?", "Postura biomecânica?", "Gorduras saudáveis?", "Foco?", "Saúde metabólica?"] },
-        'en': { title: "BIOSYNC | LONGEVITY PROTOCOL", btn: "GENERATE PROJECTION", res: "Analytical Projection", qs: ["Deep sleep quality?", "Oxidative stress?", "Cruciferous intake?", "Resistance training?", "Cortisol management?", "Vital purpose?", "Hydration?", "Sun exposure?", "Mindfulness?", "Sugar intake?", "Recovery?", "Biomarkers?", "Aerobic activity?", "Body composition?", "Toxins?", "Social engagement?", "Cognitive stimulation?", "Fruit diversity?", "Mobility?", "Light hygiene?", "Additives?", "Biomechanical posture?", "Healthy fats?", "Focus?", "Metabolic health?"] },
-        'es': { title: "BIOSYNC | PROTOCOLO DE LONGEVIDAD", btn: "GERAR PROYECCIÓN", res: "Proyección Analítica", qs: ["¿Calidad del sueño?", "¿Estrés oxidativo?", "¿Vegetales crucíferos?", "¿Ejercicio de fuerza?", "¿Gestión del cortisol?", "¿Propósito vital?", "¿Hidratación?", "¿Exposición solar?", "¿Mindfulness?", "¿Ingesta de azúcares?", "¿Recuperación?", "¿Biomarcadores?", "¿Actividad aeróbica?", "¿Composición corporal?", "¿Toxinas?", "¿Compromiso social?", "¿Estímulo cognitivo?", "¿Diversidad de frutas?", "¿Movilidad?", "¿Higiene lumínica?", "¿Aditivos?", "¿Postura biomecánica?", "¿Grasas saludables?", "¿Enfoque?", "¿Salud metabólica?"] }
+    const data = {
+        'pt': {
+            title: "BIOSYNC | PROTOCOLO DE LONGEVIDADE",
+            btn: "GERAR PROJEÇÃO",
+            res: "Projeção Analítica",
+            qs: ["Com que frequência você tem um sono profundo e reparador?", "Como você avalia o controle do seu nível de estresse diário?", "Você consome vegetais como brócolis ou couve pelo menos 4 vezes por semana?", "Você pratica exercícios de força para manter seus músculos fortes?", "Como você gerencia situações de tensão emocional intensa?", "Você sente que sua vida tem um propósito claro e motivador?", "Você bebe a quantidade de água necessária para o seu corpo todos os dias?", "Você se expõe à luz solar logo ao acordar para ajustar seu ritmo biológico?", "Você pratica alguma técnica de meditação ou atenção plena?", "Você evita o consumo de açúcar refinado e doces no seu dia a dia?", "Você sente que seu corpo recupera bem após esforços físicos?", "Você acompanha seus exames de saúde para monitorar sinais precoces de doenças?", "Você pratica exercícios aeróbicos (caminhada, corrida) para fortalecer seu coração?", "Você sente que mantém um peso corporal saudável?", "Você evita ambientes com muita poluição ou produtos químicos?", "Você mantém contatos sociais positivos e frequentes?", "Você estimula seu cérebro com leituras ou novos aprendizados?", "Você consome uma variedade de frutas e cores diferentes em suas refeições?", "Você sente facilidade em mover suas articulações sem dores?", "Você evita luzes artificiais fortes antes do horário de dormir?", "Você lê os rótulos dos alimentos para evitar corantes e aditivos?", "Você mantém uma boa postura ao sentar e realizar suas tarefas?", "Você consome gorduras saudáveis como azeite de oliva e abacate?", "Você consegue manter o foco nas suas atividades durante o dia?", "Como você avalia sua saúde metabólica e níveis de energia?"]
+        },
+        'en': {
+            title: "BIOSYNC | LONGEVITY PROTOCOL",
+            btn: "GENERATE PROJECTION",
+            res: "Analytical Projection",
+            qs: ["How often do you experience deep, restorative sleep?", "How well do you manage your daily stress levels?", "Do you eat cruciferous vegetables like broccoli at least 4 times a week?", "Do you perform strength exercises to maintain muscle health?", "How do you handle situations of intense emotional tension?", "Do you feel your life has a clear and motivating purpose?", "Do you drink the amount of water your body needs every day?", "Do you get sunlight exposure upon waking to set your biological rhythm?", "Do you practice any form of meditation or mindfulness?", "Do you avoid consuming refined sugar and sweets daily?", "Do you feel your body recovers well after physical exertion?", "Do you track your health markers to monitor early signs of illness?", "Do you perform aerobic exercise (walking, running) to strengthen your heart?", "Do you feel you maintain a healthy body weight?", "Do you avoid environments with high pollution or chemicals?", "Do you maintain positive and frequent social connections?", "Do you stimulate your brain with reading or new learning?", "Do you consume a variety of fruits and colors in your meals?", "Do you find it easy to move your joints without pain?", "Do you avoid bright artificial lights before bedtime?", "Do you read food labels to avoid dyes and additives?", "Do you maintain good posture when sitting and working?", "Do you consume healthy fats like olive oil and avocado?", "Are you able to maintain focus on your activities throughout the day?", "How do you rate your overall metabolic health and energy levels?"]
+        },
+        'es': {
+            title: "BIOSYNC | PROTOCOLO DE LONGEVIDAD",
+            btn: "GENERAR PROYECCIÓN",
+            res: "Proyección Analítica",
+            qs: ["¿Con qué frecuencia tiene un sueño profundo y reparador?", "¿Cómo evalúa su control del nivel de estrés diario?", "¿Consume vegetales como brócoli o col al menos 4 veces por semana?", "¿Realiza ejercicios de fuerza para mantener sus músculos fuertes?", "¿Cómo gestiona situaciones de tensión emocional intensa?", "¿Siente que su vida tiene un propósito claro y motivador?", "¿Bebe la cantidad de agua necesaria para su cuerpo todos los días?", "¿Se expone a la luz solar al despertar para ajustar su ritmo biológico?", "¿Practica alguna técnica de meditación o atención plena?", "¿Evita el consumo de azúcar refinada y dulces en su día a día?", "¿Siente que su cuerpo se recupera bien después de esfuerzos físicos?", "¿Sigue sus exámenes de salud para monitorear signos tempranos de enfermedades?", "¿Realiza ejercicios aeróbicos (caminar, correr) para fortalecer su corazón?", "¿Siente que mantiene un peso corporal saludable?", "¿Evita ambientes con mucha contaminación o productos químicos?", "¿Mantiene contactos sociales positivos y frecuentes?", "¿Estimula su cerebro con lecturas o nuevos aprendizajes?", "¿Consume una variedad de frutas y colores diferentes en sus comidas?", "¿Siente facilidad para mover sus articulaciones sin dolor?", "¿Evita luces artificiales fuertes antes de la hora de dormir?", "¿Lee las etiquetas de los alimentos para evitar colorantes y aditivos?", "¿Mantiene una buena postura al sentarse y realizar sus tareas?", "¿Consume grasas saludables como aceite de oliva y aguacate?", "¿Logra mantener el enfoque en sus actividades durante el día?", "¿Cómo evalúa su salud metabólica y sus niveles de energía?"]
+        }
     };
 
     function setLang(lang) {
-        document.getElementById('title').innerText = i18n[lang].title;
-        document.getElementById('submit').innerText = i18n[lang].btn;
-        document.getElementById('res-title').innerText = i18n[lang].res;
-        const qElements = document.querySelectorAll('.q-text');
-        i18n[lang].qs.forEach((text, i) => { if(qElements[i]) qElements[i].innerText = (i + 1) + ". " + text; });
+        document.getElementById('title').innerText = data[lang].title;
+        document.getElementById('submit').innerText = data[lang].btn;
+        document.getElementById('res-title').innerText = data[lang].res;
+        const els = document.querySelectorAll('.q-text');
+        data[lang].qs.forEach((q, i) => { if(els[i]) els[i].innerText = (i+1) + ". " + q; });
     }
 
     const container = document.getElementById('questions-container');
-    i18n['pt'].qs.forEach((q, i) => {
+    data['pt'].qs.forEach((q, i) => {
         let opts = "";
-        for(let n=1; n<=5; n++) opts += `<button class="opt" onclick="select(this)">${n}</button>`;
+        for(let n=1; n<=10; n++) opts += `<button class="opt" onclick="select(this)">${n}</button>`;
         container.innerHTML += `<div class="q-group"><div class="q-text">${i+1}. ${q}</div><div class="options">${opts}</div></div>`;
     });
 
     function select(el) { el.parentElement.querySelectorAll('.opt').forEach(b => b.classList.remove('active')); el.classList.add('active'); }
-    function showResults() { document.getElementById('survey').classList.add('hidden'); document.getElementById('results').classList.remove('hidden'); document.getElementById('score').innerText = "85 Anos"; }
+    function showResults() { document.getElementById('survey').classList.add('hidden'); document.getElementById('results').classList.remove('hidden'); }
 </script>
 </body>
 </html>
