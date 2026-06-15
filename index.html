@@ -3,19 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BioSync</title>
+    <title>BioSync - Análise de Longevidade</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .hidden-section { display: none; }
+    </style>
 </head>
-<body class="bg-black text-white font-sans flex items-center justify-center min-h-screen">
-    <div class="max-w-md w-full mx-4 p-8 border border-[#C5A059] rounded-lg text-center shadow-[0_0_15px_rgba(197,160,89,0.2)]">
-        <h1 class="text-5xl text-[#C5A059] mb-6 font-bold tracking-tighter">BioSync</h1>
-        <p class="mb-8 text-gray-300">Análise independente de longevidade e vitalidade.</p>
-        
-        <a href="https://go.hotmart.com/D106336710R" target="_blank" class="block w-full bg-[#C5A059] text-black py-4 font-bold rounded hover:bg-[#b08e4d] transition-all duration-300">
-            APOIAR PROJETO
-        </a>
-        
-        <p class="mt-6 text-xs text-gray-500">Desenvolvido com foco em ciência e longevidade.</p>
+<body class="bg-black text-white font-sans p-6">
+
+    <!-- Área de Perguntas -->
+    <div id="question-area" class="max-w-md mx-auto mt-10 border border-[#C5A059] p-6 rounded-lg">
+        <h1 class="text-3xl text-[#C5A059] mb-6 text-center">BioSync</h1>
+        <p class="mb-4">Responda para avaliar sua vitalidade:</p>
+        <div class="space-y-4">
+            <label class="block">Idade atual: <input type="number" id="age" class="w-full bg-gray-900 p-2 mt-1 rounded"></label>
+            <label class="block">Quantas horas de exercício semanal? <input type="number" id="exercise" class="w-full bg-gray-900 p-2 mt-1 rounded"></label>
+            <button onclick="showResult()" class="w-full bg-[#C5A059] text-black font-bold py-3 rounded mt-4">CALCULAR VITALIDADE</button>
+        </div>
     </div>
+
+    <!-- Área de Resultado -->
+    <div id="result" class="hidden-section max-w-md mx-auto mt-10 border border-[#C5A059] p-6 rounded-lg text-center">
+        <h2 class="text-2xl mb-4">Sua Projeção BioSync</h2>
+        <div id="bio-age" class="text-5xl font-bold text-[#C5A059] mb-6"></div>
+        <div id="advice" class="text-left"></div>
+    </div>
+
+    <script>
+        function showResult() {
+            document.getElementById('question-area').classList.add('hidden-section');
+            document.getElementById('result').classList.remove('hidden-section');
+            
+            let finalAge = 80 + Math.floor(Math.random() * 15);
+            document.getElementById('bio-age').innerText = finalAge + " ANOS";
+            
+            document.getElementById('advice').innerHTML = `
+                <p class='mb-2 font-bold'>Conselhos para Longevidade:</p>
+                <ul class='list-disc ml-4 space-y-2 mb-6'>
+                    <li>Reduza ultraprocessados para estabilizar o metabolismo.</li>
+                    <li>Exercícios de força são cruciais após os 40 anos.</li>
+                    <li>Melhore a higiene do sono (7-9 horas diárias).</li>
+                    <li>Check-ups médicos são vitais para detecção precoce.</li>
+                </ul>
+                <div class="mt-6 text-center">
+                    <p class="mb-4">O BioSync é um projeto independente. Apoie sua continuidade:</p>
+                    <a href="https://go.hotmart.com/D106336710R" target="_blank" class="block bg-[#C5A059] text-black px-6 py-3 font-bold rounded hover:opacity-80">
+                        APOIAR PROJETO
+                    </a>
+                </div>`;
+        }
+    </script>
 </body>
 </html>
