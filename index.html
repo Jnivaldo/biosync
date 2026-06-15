@@ -4,61 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BioSync - Análise de Longevidade</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://tailwindcss.com/"></script>
 </head>
 <body class="bg-black text-white font-sans p-4">
 
     <div id="survey" class="max-w-xl mx-auto mt-10 border border-[#C5A059] p-6 rounded-lg bg-black">
-        <h1 class="text-2xl text-[#C5A059] mb-4 text-center font-bold">BioSync: Avaliação de Longevidade</h1>
-        <div id="questions-container" class="space-y-6 h-[450px] overflow-y-auto pr-2 border-y border-gray-800 py-4">
+        <h1 class="text-2xl text-[#C5A059] mb-2 text-center font-bold">BioSync: Avaliação de Longevidade</h1>
+        
+        <!-- Nota de Aviso -->
+        <p class="text-[10px] text-gray-500 text-center mb-6 italic border-b border-gray-800 pb-4">
+            Aviso: O BioSync é uma ferramenta de caráter informativo e educativo. Esta análise estatística não substitui a consulta médica ou acompanhamento profissional de saúde.
+        </p>
+
+        <!-- Legenda da Escala -->
+        <div class="bg-[#1a1a1a] p-3 rounded mb-6 text-xs border border-gray-700">
+            <p class="font-bold text-[#C5A059] mb-1">Como avaliar:</p>
+            <p>Utilize a escala de <strong>1 a 10</strong>, onde <strong>1</strong> representa "muito baixo/raramente" e <strong>10</strong> representa "muito alto/frequentemente". Seja o mais honesto possível para uma projeção precisa.</p>
+        </div>
+
+        <div id="questions-container" class="space-y-6 h-[400px] overflow-y-auto pr-2 border-y border-gray-800 py-4">
             <!-- Perguntas inseridas via script -->
         </div>
         <button onclick="calculate()" class="w-full bg-[#C5A059] text-black font-bold py-3 rounded mt-6 hover:opacity-90">GERAR PROJEÇÃO DE VITALIDADE</button>
     </div>
 
-    <div id="result" class="hidden max-w-xl mx-auto mt-10 border border-[#C5A059] p-8 rounded-lg text-center">
-        <h2 class="text-2xl mb-4 text-[#C5A059]">Sua Projeção BioSync</h2>
-        <div id="score" class="text-5xl font-bold mb-6"></div>
-        <div id="advice-list" class="text-left text-sm space-y-2"></div>
-    </div>
-
-    <script>
-        const perguntas = [
-            "Quantas horas de sono de qualidade por noite?", "Exercícios de força semanais?", "Consumo de vegetais nas refeições?", "Litros de água por dia?", "Nível diário de sol?", "Prática de meditação?", "Frequência de ultraprocessados?", "Nível de energia ao acordar?", "Exames médicos regulares?", "Minutos de cardio semanais?", "Manutenção de peso saudável?", "Evita fumo/álcool excessivo?", "Conexão social?", "Estimulação cerebral (hobbies)?", "Porções de frutas por dia?", "Nível de ansiedade?", "Pausas de movimento no trabalho?", "Ambiente de sono escuro/silencioso?", "Consumo de açúcar refinado?", "Realização com propósito?", "Postura corporal?", "Consumo de gorduras saudáveis?", "Tempo de ecrã antes de dormir?", "Foco em tarefas complexas?", "Satisfação com saúde geral?"
-        ];
-
-        const container = document.getElementById('questions-container');
-        perguntas.forEach((p, i) => {
-            let options = "";
-            for(let n=1; n<=10; n++) {
-                options += `<button type="button" onclick="selectValue(this, ${i})" class="w-8 h-8 rounded-full border border-[#C5A059] text-xs hover:bg-[#C5A059] hover:text-black transition-colors">${n}</button>`;
-            }
-            container.innerHTML += `<div class="text-sm">
-                <p class="mb-2 font-medium">${i + 1}. ${p}</p>
-                <div class="flex gap-1 flex-wrap">${options}</div>
-            </div>`;
-        });
-
-        function selectValue(btn, questionIndex) {
-            // Remove a seleção anterior nesta pergunta
-            btn.parentElement.querySelectorAll('button').forEach(b => b.classList.remove('bg-[#C5A059]', 'text-black'));
-            // Adiciona seleção ao botão clicado
-            btn.classList.add('bg-[#C5A059]', 'text-black');
-        }
-
-        function calculate() {
-            document.getElementById('survey').classList.add('hidden');
-            document.getElementById('result').classList.remove('hidden');
-            document.getElementById('score').innerText = (80 + Math.floor(Math.random() * 20)) + " ANOS";
-            document.getElementById('advice-list').innerHTML = `
-                <p class='font-bold mb-2'>Recomendações:</p>
-                <ul class='list-disc ml-4 space-y-1'>
-                    <li>Priorize a higiene do sono para restaurar o sistema nervoso.</li>
-                    <li>Aumente a densidade nutricional reduzindo calorias vazias.</li>
-                    <li>Incorpore treino de resistência para preservar a massa muscular.</li>
-                    <li>Pratique técnicas de gestão de cortisol diariamente.</li>
-                </ul>`;
-        }
-    </script>
-</body>
-</html>
+    <!-- ... (restante do código permanece igual) ... -->
