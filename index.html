@@ -2,61 +2,52 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <title>BioSync | Protocolo de Longevidade</title>
+    <title>BioSync | Longevity Protocol</title>
     <style>
         :root { --gold: #C5A059; }
         body { background-color: #050505; color: #d1d1d1; font-family: 'Georgia', serif; margin: 0; padding: 20px; }
         .wrapper { max-width: 700px; margin: 0 auto; border: 1px solid #1a1a1a; padding: 40px; border-radius: 8px; background: #080808; }
-        h1 { color: var(--gold); text-align: center; letter-spacing: 3px; font-size: 20px; margin-bottom: 30px; }
+        h1 { color: var(--gold); text-align: center; letter-spacing: 3px; font-size: 20px; }
         .q-group { margin-bottom: 20px; border-bottom: 1px solid #151515; padding-bottom: 15px; }
-        .options { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 8px; }
         .opt { width: 32px; height: 32px; border: 1px solid #333; background: transparent; color: #777; cursor: pointer; }
         .opt.active { border-color: var(--gold); color: var(--gold); }
         button#submit { width: 100%; padding: 15px; background: var(--gold); color: black; font-weight: bold; cursor: pointer; border: none; margin-top: 20px; }
-        input[type="number"] { background: #111; border: 1px solid #333; color: white; padding: 5px; width: 60px; margin-right: 10px; }
         .hidden { display: none; }
     </style>
 </head>
 <body>
 
 <div class="wrapper">
-    <div style="text-align: right; margin-bottom: 10px;">
-        <button onclick="toggleMusic()" style="background:none; border:none; color:#555; cursor:pointer; font-size: 11px;">ॐ Som Meditativo</button>
-        <audio id="bgMusic" loop src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-2.mp3"></audio>
+    <!-- Seletor de Idioma -->
+    <div style="text-align: center; margin-bottom: 20px;">
+        <button onclick="setLang('pt')" style="background:none; border:1px solid #C5A059; color:#C5A059; cursor:pointer; padding:5px;">PT</button>
+        <button onclick="setLang('en')" style="background:none; border:1px solid #C5A059; color:#C5A059; cursor:pointer; padding:5px;">EN</button>
+        <button onclick="setLang('es')" style="background:none; border:1px solid #C5A059; color:#C5A059; cursor:pointer; padding:5px;">ES</button>
     </div>
 
-    <h1>BIOSYNC | PROTOCOLO DE LONGEVIDADE</h1>
+    <h1 id="title">BIOSYNC | PROTOCOLO DE LONGEVIDADE</h1>
     
     <div id="survey">
-        <div class="q-group" style="border: 1px solid #222; padding: 15px; border-radius: 5px;">
+        <div class="q-group">
             <label>Idade: <input type="number" id="age"></label>
             <label>Pai (falecimento): <input type="number" id="dadAge"></label>
             <label>Mãe (falecimento): <input type="number" id="momAge"></label>
         </div>
         <div id="questions-container"></div>
-        <button id="submit" onclick="showResults()">GERAR PROJEÇÃO DE VITALIDADE</button>
+        <button id="submit" onclick="showResults()">GERAR PROJEÇÃO</button>
     </div>
 
     <div id="results" class="hidden">
-        <h2 style="color:var(--gold)">Projeção Analítica</h2>
-        <p>Expectativa estimada: <strong id="score" style="font-size:24px;"></strong></p>
-        <div id="advice" style="margin-top:20px; line-height: 1.6;"></div>
-        <a href="https://go.hotmart.com/D106336710R" style="display:block; text-align:center; padding:15px; background:var(--gold); color:black; font-weight:bold; text-decoration:none; margin-top:20px;">OBTER RELATÓRIO COMPLETO</a>
+        <h2 id="res-title" style="color:var(--gold)">Projeção Analítica</h2>
+        <p id="res-text">Sua expectativa estimada é de: <strong id="score" style="font-size:24px;"></strong></p>
+        <a href="COLE_AQUI_O_SEU_LINK_DA_HOTMART" style="display:block; text-align:center; padding:15px; background:var(--gold); color:black; font-weight:bold; text-decoration:none; margin-top:20px;">OBTER RELATÓRIO COMPLETO</a>
     </div>
 </div>
 
 <script>
-    const qs = [
-        "Qualidade do sono profundo?", "Nível de estresse oxidativo?", "Consumo de vegetais crucíferos?", 
-        "Prática de exercícios de força?", "Gestão de cortisol?", "Satisfação com propósito vital?", 
-        "Hidratação diária?", "Exposição solar (min/dia)?", "Prática de mindfulness?", 
-        "Ingestão de açúcares?", "Recuperação pós-esforço?", "Exames de biomarcadores?", 
-        "Atividade aeróbica semanal?", "Controle de composição corporal?", "Exposição a toxinas?", 
-        "Engajamento social?", "Estímulo cognitivo?", "Diversidade de frutas?", 
-        "Mobilidade ativa?", "Higiene luminosa noturna?", "Uso de aditivos?", 
-        "Postura biomecânica?", "Consumo de gorduras saudáveis?", "Foco em tarefas?", "Saúde metabólica?"
-    ];
-
+    const qs = ["Sono profundo?", "Estresse oxidativo?", "Vegetais crucíferos?", "Treino de força?", "Gestão de cortisol?", "Propósito vital?", "Hidratação?", "Exposição solar?", "Mindfulness?", "Ingestão de açúcares?", "Recuperação?", "Biomarcadores?", "Atividade aeróbica?", "Composição corporal?", "Toxinas?", "Engajamento social?", "Estímulo cognitivo?", "Diversidade de frutas?", "Mobilidade?", "Higiene luminosa?", "Aditivos?", "Postura biomecânica?", "Gorduras saudáveis?", "Foco?", "Saúde metabólica?"];
+    
+    // Inserção das perguntas
     const container = document.getElementById('questions-container');
     qs.forEach((q, i) => {
         let opts = "";
@@ -64,21 +55,23 @@
         container.innerHTML += `<div class="q-group"><div>${i+1}. ${q}</div><div class="options">${opts}</div></div>`;
     });
 
-    function select(el) {
-        el.parentElement.querySelectorAll('.opt').forEach(b => b.classList.remove('active'));
-        el.classList.add('active');
-    }
-
-    function toggleMusic() { 
-        let a = document.getElementById('bgMusic'); 
-        a.paused ? a.play() : a.pause(); 
+    function select(el) { el.parentElement.querySelectorAll('.opt').forEach(b => b.classList.remove('active')); el.classList.add('active'); }
+    
+    function setLang(lang) {
+        const texts = {
+            'pt': {title: "BIOSYNC | PROTOCOLO DE LONGEVIDADE", btn: "GERAR PROJEÇÃO", res: "Projeção Analítica"},
+            'en': {title: "BIOSYNC | LONGEVITY PROTOCOL", btn: "GENERATE PROJECTION", res: "Analytical Projection"},
+            'es': {title: "BIOSYNC | PROTOCOLO DE LONGEVIDAD", btn: "GENERAR PROYECCIÓN", res: "Proyección Analítica"}
+        };
+        document.getElementById('title').innerText = texts[lang].title;
+        document.getElementById('submit').innerText = texts[lang].btn;
+        document.getElementById('res-title').innerText = texts[lang].res;
     }
 
     function showResults() {
         document.getElementById('survey').classList.add('hidden');
         document.getElementById('results').classList.remove('hidden');
         document.getElementById('score').innerText = (78 + Math.floor(Math.random() * 22)) + " Anos";
-        document.getElementById('advice').innerHTML = "Baseado em seu histórico genético e hábitos declarados, recomendamos a otimização de biomarcadores através de modulação inflamatória, ajuste circadiano e treino neuromuscular de alta densidade.";
     }
 </script>
 </body>
