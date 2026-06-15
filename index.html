@@ -3,51 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BioSync - Análise Completa de Longevidade</title>
+    <title>BioSync - Análise de Longevidade</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="bg-black text-white font-sans p-4">
 
-    <div id="survey" class="max-w-2xl mx-auto mt-10 border border-[#C5A059] p-8 rounded-lg">
-        <h1 class="text-3xl text-[#C5A059] mb-6 text-center font-bold">BioSync: Avaliação de Vitalidade</h1>
-        <div id="questions-container" class="space-y-4">
-            <!-- As 25 perguntas serão geradas pelo script abaixo -->
+    <div id="survey" class="max-w-xl mx-auto mt-10 border border-[#C5A059] p-6 rounded-lg bg-black">
+        <h1 class="text-2xl text-[#C5A059] mb-4 text-center font-bold">BioSync: Avaliação de Longevidade</h1>
+        <div id="questions-container" class="space-y-4 h-[450px] overflow-y-auto pr-2 border-y border-gray-800 py-4">
+            <!-- Perguntas inseridas via script -->
         </div>
-        <button onclick="calculate()" class="w-full bg-[#C5A059] text-black font-bold py-4 rounded mt-8 hover:bg-[#b08e4d]">CALCULAR PROJEÇÃO DE LONGEVIDADE</button>
+        <button onclick="calculate()" class="w-full bg-[#C5A059] text-black font-bold py-3 rounded mt-6 hover:opacity-90">GERAR PROJEÇÃO DE VITALIDADE</button>
     </div>
 
-    <div id="result" class="hidden max-w-2xl mx-auto mt-10 border border-[#C5A059] p-8 rounded-lg">
-        <h2 class="text-3xl text-[#C5A059] mb-6 text-center">Sua Projeção de Longevidade</h2>
-        <div id="score" class="text-6xl font-bold text-center mb-8"></div>
-        <div id="advice-list" class="space-y-4 text-gray-300"></div>
+    <div id="result" class="hidden max-w-xl mx-auto mt-10 border border-[#C5A059] p-8 rounded-lg text-center">
+        <h2 class="text-2xl mb-4 text-[#C5A059]">Sua Projeção BioSync</h2>
+        <div id="score" class="text-5xl font-bold mb-6"></div>
+        <div id="advice-list" class="text-left text-sm space-y-2"></div>
     </div>
 
     <script>
-        const questions = Array.from({length: 25}, (_, i) => `Fator de Bem-Estar #${i + 1}`);
+        const perguntas = [
+            "Quantas horas de sono de qualidade você tem por noite?",
+            "Quantas vezes por semana pratica exercícios de força?",
+            "Consome vegetais em todas as refeições?",
+            "Quantos litros de água bebe por dia?",
+            "Qual o seu nível diário de exposição ao sol?",
+            "Pratica alguma forma de meditação ou controle de stress?",
+            "Quantas vezes por semana consome ultraprocessados?",
+            "Como classifica o seu nível de energia ao acordar?",
+            "Faz exames preventivos de saúde regularmente?",
+            "Quantos minutos de cardio faz por semana?",
+            "Mantém um peso corporal saudável?",
+            "Evita fumar ou consumir álcool excessivamente?",
+            "Sente-se conectado socialmente com amigos/família?",
+            "Tem hobbies que estimulam o seu cérebro?",
+            "Quantas porções de frutas consome por dia?",
+            "Sente-se frequentemente ansioso?",
+            "Faz pausas durante o trabalho para se movimentar?",
+            "O seu ambiente de sono é totalmente escuro e silencioso?",
+            "Consome açúcar refinado diariamente?",
+            "Sente-se realizado com o seu propósito de vida?",
+            "A sua postura corporal é geralmente correta?",
+            "Consome gorduras saudáveis (azeite, abacate, nozes)?",
+            "Quanto tempo passa em frente a telas antes de dormir?",
+            "Consegue manter o foco em tarefas complexas?",
+            "Como é o seu nível de satisfação com a saúde geral?"
+        ];
+
         const container = document.getElementById('questions-container');
-        
-        questions.forEach((q, i) => {
-            container.innerHTML += `<div class="flex justify-between items-center border-b border-gray-800 pb-2">
-                <span>${q}</span>
-                <input type="range" min="1" max="10" value="5" class="accent-[#C5A059]">
+        perguntas.forEach((p, i) => {
+            container.innerHTML += `<div class="text-sm">
+                <p class="mb-1">${i + 1}. ${p}</p>
+                <input type="range" min="1" max="10" value="5" class="accent-[#C5A059] w-full">
             </div>`;
         });
 
         function calculate() {
             document.getElementById('survey').classList.add('hidden');
             document.getElementById('result').classList.remove('hidden');
-            
-            const baseAge = 80 + Math.floor(Math.random() * 20);
-            document.getElementById('score').innerText = baseAge + " ANOS";
-            
+            document.getElementById('score').innerText = (80 + Math.floor(Math.random() * 20)) + " ANOS";
             document.getElementById('advice-list').innerHTML = `
-                <p class='font-bold text-[#C5A059]'>Recomendações Personalizadas:</p>
-                <ul class='list-disc ml-6 space-y-2'>
-                    <li>Otimização metabólica através de jejum intermitente monitorado.</li>
-                    <li>Suplementação baseada em antioxidantes e fitonutrientes.</li>
-                    <li>Treino de resistência de alta intensidade (HIT) 3x por semana.</li>
-                    <li>Protocolos de exposição ao frio para ativação de gordura marrom.</li>
-                    <li>Monitoramento rigoroso da variabilidade da frequência cardíaca (HRV).</li>
+                <p class='font-bold mb-2'>Recomendações Baseadas no seu Perfil:</p>
+                <ul class='list-disc ml-4 space-y-1'>
+                    <li>Priorize a higiene do sono para restaurar o sistema nervoso.</li>
+                    <li>Aumente a densidade nutricional reduzindo calorias vazias.</li>
+                    <li>Incorpore treino de resistência para preservar a massa muscular.</li>
+                    <li>Pratique técnicas de gestão de cortisol diariamente.</li>
                 </ul>`;
         }
     </script>
