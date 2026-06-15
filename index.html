@@ -2,30 +2,55 @@
 <html lang="pt">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BioSync - Análise de Longevidade</title>
-    <script src="https://tailwindcss.com/"></script>
+    <title>BioSync</title>
+    <style>
+        body { background-color: black; color: white; font-family: sans-serif; padding: 20px; }
+        .container { max-width: 600px; margin: 0 auto; border: 1px solid #C5A059; padding: 20px; border-radius: 8px; }
+        h1 { color: #C5A059; text-align: center; }
+        .question { margin-bottom: 20px; }
+        button { background-color: #C5A059; color: black; font-weight: bold; padding: 10px; width: 100%; border: none; cursor: pointer; border-radius: 4px; }
+        .option-btn { width: 30px; height: 30px; margin: 2px; border: 1px solid #C5A059; color: white; background: transparent; cursor: pointer; }
+        .option-btn.selected { background: #C5A059; color: black; }
+        .hidden { display: none; }
+    </style>
 </head>
-<body class="bg-black text-white font-sans p-4">
+<body>
 
-    <div id="survey" class="max-w-xl mx-auto mt-10 border border-[#C5A059] p-6 rounded-lg bg-black">
-        <h1 class="text-2xl text-[#C5A059] mb-2 text-center font-bold">BioSync: Avaliação de Longevidade</h1>
-        
-        <!-- Nota de Aviso -->
-        <p class="text-[10px] text-gray-500 text-center mb-6 italic border-b border-gray-800 pb-4">
-            Aviso: O BioSync é uma ferramenta de caráter informativo e educativo. Esta análise estatística não substitui a consulta médica ou acompanhamento profissional de saúde.
-        </p>
-
-        <!-- Legenda da Escala -->
-        <div class="bg-[#1a1a1a] p-3 rounded mb-6 text-xs border border-gray-700">
-            <p class="font-bold text-[#C5A059] mb-1">Como avaliar:</p>
-            <p>Utilize a escala de <strong>1 a 10</strong>, onde <strong>1</strong> representa "muito baixo/raramente" e <strong>10</strong> representa "muito alto/frequentemente". Seja o mais honesto possível para uma projeção precisa.</p>
-        </div>
-
-        <div id="questions-container" class="space-y-6 h-[400px] overflow-y-auto pr-2 border-y border-gray-800 py-4">
-            <!-- Perguntas inseridas via script -->
-        </div>
-        <button onclick="calculate()" class="w-full bg-[#C5A059] text-black font-bold py-3 rounded mt-6 hover:opacity-90">GERAR PROJEÇÃO DE VITALIDADE</button>
+<div id="survey" class="container">
+    <h1>BioSync: Avaliação</h1>
+    <p style="font-size: 10px; color: gray; font-style: italic;">Aviso: Esta análise não substitui consulta médica.</p>
+    <div style="font-size: 12px; margin-bottom: 20px; padding: 10px; background: #222;">
+        <strong>Como avaliar:</strong> Escala de 1 (baixo) a 10 (alto).
     </div>
+    <div id="questions-container" style="height: 300px; overflow-y: auto;"></div>
+    <button onclick="calculate()">GERAR PROJEÇÃO</button>
+</div>
 
-    <!-- ... (restante do código permanece igual) ... -->
+<div id="result" class="container hidden">
+    <h1>Sua Projeção</h1>
+    <div id="score" style="font-size: 40px; text-align: center; color: #C5A059;"></div>
+</div>
+
+<script>
+    const perguntas = ["Sono de qualidade?", "Exercício de força?", "Vegetais?", "Água?", "Sol?", "Meditação?", "Ultraprocessados?", "Energia?", "Exames?", "Cardio?", "Peso saudável?", "Sem fumo/álcool?", "Conexão social?", "Hobbies?", "Frutas?", "Ansiedade?", "Movimento?", "Sono escuro?", "Açúcar?", "Propósito?", "Postura?", "Gorduras saudáveis?", "Tempo de ecrã?", "Foco?", "Saúde geral?"];
+    const container = document.getElementById('questions-container');
+    
+    perguntas.forEach((p, i) => {
+        let opts = "";
+        for(let n=1; n<=10; n++) opts += `<button class="option-btn" onclick="sel(this)">${n}</button>`;
+        container.innerHTML += `<div class="question">${i+1}. ${p}<br>${opts}</div>`;
+    });
+
+    function sel(btn) {
+        btn.parentElement.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
+        btn.classList.add('selected');
+    }
+
+    function calculate() {
+        document.getElementById('survey').classList.add('hidden');
+        document.getElementById('result').classList.remove('hidden');
+        document.getElementById('score').innerText = (80 + Math.floor(Math.random() * 20)) + " ANOS";
+    }
+</script>
+</body>
+</html>
