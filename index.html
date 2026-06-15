@@ -7,20 +7,29 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         :root { --gold: #C5A059; --bg: #0A0A0A; }
-        body { background-color: var(--bg); color: #E0E0E0; font-family: 'Montserrat', sans-serif; padding: 20px; display: flex; justify-content: center; }
-        .container { max-width: 600px; width: 100%; background: #121212; padding: 40px; border-radius: 12px; border: 1px solid #222; }
-        h1 { font-family: 'Playfair Display', serif; color: var(--gold); text-align: center; }
+        body { background-color: var(--bg); color: #E0E0E0; font-family: 'Montserrat', sans-serif; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; }
+        .container { max-width: 600px; width: 100%; background: #121212; padding: 40px; border-radius: 12px; border: 1px solid #222; position: relative; }
+        
+        /* Logo no canto superior esquerdo */
+        .logo { position: absolute; top: 20px; left: 20px; width: 50px; height: 50px; }
+        
+        h1 { font-family: 'Playfair Display', serif; color: var(--gold); text-align: center; margin-top: 40px; }
         .q-group { margin-bottom: 25px; border-bottom: 1px solid #222; padding-bottom: 15px; }
         .q-text { margin-bottom: 10px; font-size: 14px; line-height: 1.5; }
         .opt { width: 35px; height: 35px; border: 1px solid #333; background: #1A1A1A; color: #888; cursor: pointer; border-radius: 4px; }
         .opt.active { background: var(--gold); color: black; border: none; }
         button#submit { width: 100%; padding: 15px; background: var(--gold); border: none; font-weight: bold; cursor: pointer; border-radius: 4px; margin-top: 20px; }
         .hidden { display: none; }
+        
+        /* Rodapé */
+        footer { margin-top: auto; padding: 20px; text-align: center; font-size: 10px; color: #444; border-top: 1px solid #1a1a1a; width: 100%; }
     </style>
 </head>
 <body>
 
 <div class="container">
+    <img src="URL_DO_SEU_LOGO" alt="Logo" class="logo">
+    
     <div style="text-align: center; margin-bottom: 20px;">
         <button onclick="setLang('pt')" style="background:none; color:var(--gold); border:none; cursor:pointer;">PT</button> |
         <button onclick="setLang('en')" style="background:none; color:var(--gold); border:none; cursor:pointer;">EN</button> |
@@ -46,9 +55,13 @@
     </div>
     <div id="results" class="hidden" style="text-align:center;">
         <h2 id="res-title" style="color:var(--gold)">Projeção Analítica</h2>
-        <a href="https://go.hotmart.com/D106336710R" style="display:inline-block; margin-top:20px; padding:15px; background:var(--gold); color:black; text-decoration:none; font-weight:bold;">OBTER RELATÓRIO COMPLETO</a>
+        <a href="https://go.hotmart.com/D106336710R" style="display:inline-block; margin-top:20px; padding:15px; background:var(--gold); color:black; text-decoration:none; font-weight:bold; border-radius:4px;">OBTER RELATÓRIO COMPLETO</a>
     </div>
 </div>
+
+<footer>
+    &copy; 2026 BioSync Longevity Protocol. Todos os direitos reservados.
+</footer>
 
 <script>
     const data = {
@@ -65,7 +78,7 @@
         'es': {
             title: "BIOSYNC | PROTOCOLO DE LONGEVIDAD", btn: "GENERAR PROYECCIÓN", res: "Proyección Analítica",
             avisos: ["Aviso 1: Esta herramienta es solo para fines informativos.", "Aviso 2: No sustituye una consulta médica profesional."],
-            qs: ["¿Con qué frecuencia tiene un sueño profundo y reparador?", "¿Cómo evalúa su control del nivel de estrés diario?", "¿Consume vegetales como brócoli o col al menos 4 veces por semana?", "¿Realiza ejercicios de fuerza para mantener sus músculos fuertes?", "¿Cómo gestiona situaciones de tensión emocional intensa?", "¿Siente que su vida tiene un propósito claro y motivador?", "¿Bebe la cantidad de agua necesaria para su cuerpo todos los días?", "¿Se expone a la luz solar al despertar para ajustar su ritmo biológico?", "¿Practica alguna técnica de meditación o atención plena?", "¿Evita el consumo de azúcar refinada y dulces en su día a día?", "¿Siente que su cuerpo se recupera bien después de esfuerzos físicos?", "¿Sigue sus exámenes de salud para monitorear signos tempranos de enfermedades?", "¿Realiza ejercicios aeróbicos (caminar, correr) para fortalecer su corazón?", "¿Siente que mantiene un peso corporal saludable?", "¿Evita ambientes con mucha contaminación o productos químicos?", "¿Mantiene contactos sociales positivos y frecuentes?", "¿Estimula su cerebro con lecturas o nuevos aprendizajes?", "¿Consume una variedad de frutas y colores diferentes en sus comidas?", "¿Siente facilidad para mover sus articulaciones sin dolor?", "¿Evita luces artificiales fuertes antes de la hora de dormir?", "¿Lee las etiquetas de los alimentos para evitar colorantes y aditivos?", "¿Mantiene una buena postura al sentarse y realizar sus tareas?", "¿Consume grasas saludables como aceite de oliva y aguacate?", "¿Logra mantener el enfoque en sus actividades durante el día?", "¿Cómo evalúa su salud metabólica y sus niveles de energía?"]
+            qs: ["¿Con qué frecuencia tiene un sueño profundo y reparador?", "¿Cómo evalúa su control del nivel de estrés diario?", "¿Consume vegetales como brócoli o col al menos 4 veces por semana?", "¿Realiza ejercicios de fuerza para mantener sus músculos fuertes?", "¿Cómo gestiona situaciones de tensión emocional intensa?", "¿Siente que su vida tiene un propósito claro y motivador?", "¿Bebe la cantidad de agua necesaria para su cuerpo todos los días?", "¿Se expone a la luz solar al despertar para ajustar su ritmo biológico?", "¿Practica alguna técnica de meditación o atención plena?", "¿Evita el consumo de azúcar refinada y dulces en su día a día?", "¿Siente que su cuerpo se recupera bien después de esfuerzos físicos?", "¿Sigue sus exámenes de salud para monitorear signos tempranos de enfermedades?", "¿Realiza ejercicios aeróbicos (caminar, correr) para fortalecer su corazón?", "¿Siente que mantiene un peso corporal saludable?", "¿Evita ambientes con mucha contaminación o productos químicos?", "¿Mantiene contactos sociales positivos y frecuentes?", "¿Estimula su cerebro con leituras o nuevos aprendizajes?", "¿Consume una variedad de frutas y colores diferentes en sus comidas?", "¿Siente facilidad para mover sus articulaciones sin dolor?", "¿Evita luces artificiales fuertes antes de la hora de dormir?", "¿Lee las etiquetas de los alimentos para evitar colorantes y aditivos?", "¿Mantiene una buena postura al sentarse y realizar sus tareas?", "¿Consume grasas saludables como aceite de oliva y aguacate?", "¿Logra mantener el enfoque en sus actividades durante el día?", "¿Cómo evalúa su salud metabólica y sus niveles de energía?"]
         }
     };
 
