@@ -10,35 +10,48 @@
         body { background-color: var(--bg); color: #E0E0E0; font-family: 'Montserrat', sans-serif; padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; }
         .container { max-width: 600px; width: 100%; background: #121212; padding: 40px; border-radius: 12px; border: 1px solid #222; position: relative; }
         
-        /* Logotipo */
-        .logo { position: absolute; top: 20px; left: 20px; width: 60px; height: 60px; }
+        /* Ajuste do Logotipo */
+        .logo-container { display: flex; align-items: center; margin-bottom: 20px; }
+        .logo { width: 60px; height: 60px; margin-right: 15px; }
         
-        h1 { font-family: 'Playfair Display', serif; color: var(--gold); text-align: center; margin-top: 50px; }
-        .input-group { margin-bottom: 20px; text-align: left; }
+        .header-controls { text-align: center; margin-bottom: 20px; }
+        .avisos { text-align: center; font-size: 11px; color: #666; margin-bottom: 20px; line-height: 1.4; }
+        
+        h1 { font-family: 'Playfair Display', serif; color: var(--gold); text-align: center; margin-top: 30px; }
+        .input-group { margin-bottom: 15px; text-align: left; }
         .input-group label { display: block; font-size: 12px; margin-bottom: 5px; color: var(--gold); }
         .input-group input { width: 100%; padding: 10px; background: #1A1A1A; border: 1px solid #333; color: white; border-radius: 4px; box-sizing: border-box; }
         
         .q-group { margin-bottom: 25px; border-bottom: 1px solid #222; padding-bottom: 15px; }
-        .q-text { margin-bottom: 10px; font-size: 14px; line-height: 1.5; }
+        .q-text { margin-bottom: 10px; font-size: 14px; }
         .opt { width: 35px; height: 35px; border: 1px solid #333; background: #1A1A1A; color: #888; cursor: pointer; border-radius: 4px; }
         .opt.active { background: var(--gold); color: black; border: none; }
         button#submit { width: 100%; padding: 15px; background: var(--gold); border: none; font-weight: bold; cursor: pointer; border-radius: 4px; margin-top: 20px; }
         .hidden { display: none; }
-        footer { margin-top: 20px; padding: 20px; text-align: center; font-size: 10px; color: #555; }
+        footer { margin-top: 40px; text-align: center; font-size: 10px; color: #555; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <img src="URL_DO_SEU_LOGO" alt="Logo OIG2.jpeg" class="logo">
-    
-    <div style="text-align: center; margin-bottom: 20px;">
+    <div class="logo-container">
+        <!-- Substitua o src pelo link da sua imagem OIG2.jpeg -->
+        <img src="URL_DO_SEU_LOGO" alt="Logo" class="logo">
+        <div style="flex-grow: 1;"></div>
+    </div>
+
+    <div class="header-controls">
         <button onclick="setLang('pt')" style="background:none; color:var(--gold); border:none; cursor:pointer;">PT</button> |
         <button onclick="setLang('en')" style="background:none; color:var(--gold); border:none; cursor:pointer;">EN</button> |
         <button onclick="setLang('es')" style="background:none; color:var(--gold); border:none; cursor:pointer;">ES</button>
     </div>
 
-    <!-- Campos de Dados Iniciais -->
+    <!-- Avisos Legais Restaurados -->
+    <div id="avisos" class="avisos">
+        <p id="aviso1">Aviso 1: Esta ferramenta é apenas para fins informativos.</p>
+        <p id="aviso2">Aviso 2: Não substitui uma consulta médica profissional.</p>
+    </div>
+
     <div class="input-group">
         <label id="lbl-age">Sua Idade:</label>
         <input type="number" id="age">
@@ -61,7 +74,7 @@
     
     <div id="results" class="hidden" style="text-align:center;">
         <h2 id="res-title" style="color:var(--gold)">Projeção Analítica</h2>
-        <a href="https://go.hotmart.com/D106336710R" style="display:inline-block; margin-top:20px; padding:15px; background:var(--gold); color:black; text-decoration:none; font-weight:bold; border-radius:4px;">OBTER RELATÓRIO COMPLETO</a>
+        <a href="COLE_AQUI_O_SEU_LINK_DA_HOTMART" style="display:inline-block; margin-top:20px; padding:15px; background:var(--gold); color:black; text-decoration:none; font-weight:bold; border-radius:4px;">OBTER RELATÓRIO COMPLETO</a>
     </div>
 </div>
 
@@ -70,10 +83,11 @@
 </footer>
 
 <script>
+    // Mantém a lógica anterior de tradução e seleção
     const data = {
-        'pt': { title: "BIOSYNC | PROTOCOLO DE LONGEVIDADE", btn: "GERAR PROJEÇÃO", res: "Projeção Analítica", lbls: ["Sua Idade:", "Idade de falecimento do Pai:", "Idade de falecimento da Mãe:"], qs: ["Com que frequência você tem um sono profundo e reparador?", "Como você avalia o controle do seu nível de estresse diário?", "Você consome vegetais como brócolis ou couve pelo menos 4 vezes por semana?", "Você pratica exercícios de força para manter seus músculos fortes?", "Como você gerencia situações de tensão emocional intensa?", "Você sente que sua vida tem um propósito claro e motivador?", "Você bebe a quantidade de água necessária para o seu corpo todos os dias?", "Você se expõe à luz solar logo ao acordar para ajustar seu ritmo biológico?", "Você pratica alguma técnica de meditação ou atenção plena?", "Você evita o consumo de açúcar refinado e doces no seu dia a dia?", "Você sente que seu corpo recupera bem após esforços físicos?", "Você acompanha seus exames de saúde para monitorar sinais precoces de doenças?", "Você pratica exercícios aeróbicos (caminhada, corrida) para fortalecer seu coração?", "Você sente que mantém um peso corporal saudável?", "Você evita ambientes com muita poluição ou produtos químicos?", "Você mantém contatos sociais positivos e frequentes?", "Você estimula seu cérebro com leituras ou novos aprendizados?", "Você consome uma variedade de frutas e cores diferentes em suas refeições?", "Você sente facilidade em mover suas articulações sem dores?", "Você evita luzes artificiais fortes antes do horário de dormir?", "Você lê os rótulos dos alimentos para evitar corantes e aditivos?", "Você mantém uma boa postura ao sentar e realizar suas tarefas?", "Você consome gorduras saudáveis como azeite de oliva e abacate?", "Você consegue manter o foco nas suas atividades durante o dia?", "Como você avalia sua saúde metabólica e níveis de energia?"] },
-        'en': { title: "BIOSYNC | LONGEVITY PROTOCOL", btn: "GENERATE PROJECTION", res: "Analytical Projection", lbls: ["Your Age:", "Father's age at death:", "Mother's age at death:"], qs: ["How often do you experience deep, restorative sleep?", "How well do you manage your daily stress levels?", "Do you eat cruciferous vegetables like broccoli at least 4 times a week?", "Do you perform strength exercises to maintain muscle health?", "How do you handle situations of intense emotional tension?", "Do you feel your life has a clear and motivating purpose?", "Do you drink the amount of water your body needs every day?", "Do you get sunlight exposure upon waking to set your biological rhythm?", "Do you practice any form of meditation or mindfulness?", "Do you avoid consuming refined sugar and sweets daily?", "Do you feel your body recovers well after physical exertion?", "Do you track your health markers to monitor early signs of illness?", "Do you perform aerobic exercise (walking, running) to strengthen your heart?", "Do you feel you maintain a healthy body weight?", "Do you avoid environments with high pollution or chemicals?", "Do you maintain positive and frequent social connections?", "Do you stimulate your brain with reading or new learning?", "Do you consume a variety of fruits and colors in your meals?", "Do you find it easy to move your joints without pain?", "Do you avoid bright artificial lights before bedtime?", "Do you read food labels to avoid dyes and additives?", "Do you maintain good posture when sitting and working?", "Do you consume healthy fats like olive oil and avocado?", "Are you able to maintain focus on your activities throughout the day?", "How do you rate your overall metabolic health and energy levels?"] },
-        'es': { title: "BIOSYNC | PROTOCOLO DE LONGEVIDAD", btn: "GENERAR PROYECCIÓN", res: "Proyección Analítica", lbls: ["Su Edad:", "Edad de fallecimiento del padre:", "Edad de fallecimiento de la madre:"], qs: ["¿Con qué frecuencia tiene un sueño profundo y reparador?", "¿Cómo evalúa su control del nivel de estrés diario?", "¿Consume vegetales como brócoli o col al menos 4 veces por semana?", "¿Realiza ejercicios de fuerza para mantener sus músculos fuertes?", "¿Cómo gestiona situaciones de tensión emocional intensa?", "¿Siente que su vida tiene un propósito claro y motivador?", "¿Bebe la cantidad de agua necesaria para su cuerpo todos los días?", "¿Se expone a la luz solar al despertar para ajustar su ritmo biológico?", "¿Practica alguna técnica de meditación o atención plena?", "¿Evita el consumo de azúcar refinada y dulces en su día a día?", "¿Siente que su cuerpo se recupera bien después de esfuerzos físicos?", "¿Sigue sus exámenes de salud para monitorear signos tempranos de enfermedades?", "¿Realiza ejercicios aeróbicos (caminar, correr) para fortalecer su corazón?", "¿Siente que mantiene un peso corporal saludable?", "¿Evita ambientes con mucha contaminación o productos químicos?", "¿Mantiene contactos sociales positivos y frecuentes?", "¿Estimula su cerebro con lecturas o nuevos aprendizajes?", "¿Consume una variedad de frutas y colores diferentes en sus comidas?", "¿Siente facilidad para mover sus articulações sin dolor?", "¿Evita luces artificiales fuertes antes de la hora de dormir?", "¿Lee las etiquetas de los alimentos para evitar colorantes y aditivos?", "¿Mantiene una buena postura al sentarse y realizar sus tareas?", "¿Consume grasas saludables como aceite de oliva y aguacate?", "¿Logra mantener el enfoque en sus actividades durante el día?", "¿Cómo evalúa su salud metabólica y sus niveles de energía?"] }
+        'pt': { title: "BIOSYNC | PROTOCOLO DE LONGEVIDADE", btn: "GERAR PROJEÇÃO", res: "Projeção Analítica", lbls: ["Sua Idade:", "Idade de falecimento do Pai:", "Idade de falecimento da Mãe:"], avisos: ["Aviso 1: Esta ferramenta é apenas para fins informativos.", "Aviso 2: Não substitui uma consulta médica profissional."], qs: ["Com que frequência você tem um sono profundo e reparador?", "Como você avalia o controle do seu nível de estresse diário?", "Você consome vegetais como brócolis ou couve pelo menos 4 vezes por semana?", "Você pratica exercícios de força para manter seus músculos fortes?", "Como você gerencia situações de tensão emocional intensa?", "Você sente que sua vida tem um propósito claro e motivador?", "Você bebe a quantidade de água necessária para o seu corpo todos os dias?", "Você se expõe à luz solar logo ao acordar para ajustar seu ritmo biológico?", "Você pratica alguma técnica de meditação ou atenção plena?", "Você evita o consumo de açúcar refinado e doces no seu dia a dia?", "Você sente que seu corpo recupera bem após esforços físicos?", "Você acompanha seus exames de saúde para monitorar sinais precoces de doenças?", "Você pratica exercícios aeróbicos (caminhada, corrida) para fortalecer seu coração?", "Você sente que mantém um peso corporal saudável?", "Você evita ambientes com muita poluição ou produtos químicos?", "Você mantém contatos sociais positivos e frequentes?", "Você estimula seu cérebro com leituras ou novos aprendizados?", "Você consome uma variedade de frutas e cores diferentes em suas refeições?", "Você sente facilidade em mover suas articulações sem dores?", "Você evita luzes artificiais fortes antes do horário de dormir?", "Você lê os rótulos dos alimentos para evitar corantes e aditivos?", "Você mantém uma boa postura ao satar e realizar suas tarefas?", "Você consome gorduras saudáveis como azeite de oliva e abacate?", "Você consegue manter o foco nas suas atividades durante o dia?", "Como você avalia sua saúde metabólica e níveis de energia?"] },
+        'en': { title: "BIOSYNC | LONGEVITY PROTOCOL", btn: "GENERATE PROJECTION", res: "Analytical Projection", lbls: ["Your Age:", "Father's age at death:", "Mother's age at death:"], avisos: ["Notice 1: This tool is for informational purposes only.", "Notice 2: It does not replace professional medical advice."], qs: ["How often do you experience deep, restorative sleep?", "How well do you manage your daily stress levels?", "Do you eat cruciferous vegetables like broccoli at least 4 times a week?", "Do you perform strength exercises to maintain muscle health?", "How do you handle situations of intense emotional tension?", "Do you feel your life has a clear and motivating purpose?", "Do you drink the amount of water your body needs every day?", "Do you get sunlight exposure upon waking to set your biological rhythm?", "Do you practice any form of meditation or mindfulness?", "Do you avoid consuming refined sugar and sweets daily?", "Do you feel your body recovers well after physical exertion?", "Do you track your health markers to monitor early signs of illness?", "Do you perform aerobic exercise (walking, running) to strengthen your heart?", "Do you feel you maintain a healthy body weight?", "Do you avoid environments with high pollution or chemicals?", "Do you maintain positive and frequent social connections?", "Do you stimulate your brain with reading or new learning?", "Do you consume a variety of fruits and colors in your meals?", "Do you find it easy to move your joints without pain?", "Do you avoid bright artificial lights before bedtime?", "Do you read food labels to avoid dyes and additives?", "Do you maintain good posture when sitting and working?", "Do you consume healthy fats like olive oil and avocado?", "Are you able to maintain focus on your activities throughout the day?", "How do you rate your overall metabolic health and energy levels?"] },
+        'es': { title: "BIOSYNC | PROTOCOLO DE LONGEVIDAD", btn: "GENERAR PROYECCIÓN", res: "Proyección Analítica", lbls: ["Su Edad:", "Edad de fallecimiento del padre:", "Edad de fallecimiento de la madre:"], avisos: ["Aviso 1: Esta herramienta es solo para fines informativos.", "Aviso 2: No sustituye una consulta médica profesional."], qs: ["¿Con qué frecuencia tiene un sueño profundo y reparador?", "¿Cómo evalúa su control del nivel de estrés diario?", "¿Consume vegetales como brócoli o col al menos 4 veces por semana?", "¿Realiza ejercicios de fuerza para mantener sus músculos fuertes?", "¿Cómo gestiona situaciones de tensión emocional intensa?", "¿Siente que su vida tiene un propósito claro y motivador?", "¿Bebe la cantidad de agua necesaria para su cuerpo todos los días?", "¿Se expone a la luz solar al despertar para ajustar su ritmo biológico?", "¿Practica alguna técnica de meditación o atención plena?", "¿Evita el consumo de azúcar refinada y dulces en su día a día?", "¿Siente que su cuerpo se recupera bien después de esfuerzos físicos?", "¿Sigue sus exámenes de salud para monitorear signos tempranos de enfermedades?", "¿Realiza ejercicios aeróbicos (caminar, correr) para fortalecer su corazón?", "¿Siente que mantiene un peso corporal saludable?", "¿Evita ambientes con mucha contaminación o productos químicos?", "¿Mantiene contactos sociales positivos y frecuentes?", "¿Estimula su cerebro con lecturas o nuevos aprendizajes?", "¿Consume una variedad de frutas y colores diferentes en sus comidas?", "¿Siente facilidad para mover sus articulaciones sin dolor?", "¿Evita luces artificiales fuertes antes de la hora de dormir?", "¿Lee las etiquetas de los alimentos para evitar colorantes y aditivos?", "¿Mantiene una buena postura al sentarse y realizar sus tareas?", "¿Consume grasas saludables como aceite de oliva y aguacate?", "¿Logra mantener el enfoque en sus actividades durante el día?", "¿Cómo evalúa su salud metabólica y sus niveles de energía?"] }
     };
 
     function setLang(lang) {
@@ -83,6 +97,8 @@
         document.getElementById('lbl-age').innerText = data[lang].lbls[0];
         document.getElementById('lbl-dad').innerText = data[lang].lbls[1];
         document.getElementById('lbl-mom').innerText = data[lang].lbls[2];
+        document.getElementById('aviso1').innerText = data[lang].avisos[0];
+        document.getElementById('aviso2').innerText = data[lang].avisos[1];
         const els = document.querySelectorAll('.q-text');
         data[lang].qs.forEach((q, i) => { if(els[i]) els[i].innerText = (i+1) + ". " + q; });
     }
